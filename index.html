@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Space Impact — o clássico jogo da navezinha do Nokia, recriado em JavaScript." />
+  <title>Space Impact</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="phone" role="application" aria-label="Jogo Space Impact">
+    <div class="brand">SPACE&nbsp;IMPACT</div>
+
+    <div class="screen-frame">
+      <canvas id="game" width="280" height="200" aria-label="Tela do jogo"></canvas>
+    </div>
+
+    <!-- D-pad e botões estilo Nokia (funcionam no toque e no clique) -->
+    <div class="controls" aria-hidden="false">
+      <div class="dpad">
+        <button class="key up"    data-key="ArrowUp"    aria-label="Cima">▲</button>
+        <button class="key left"  data-key="ArrowLeft"  aria-label="Esquerda">◀</button>
+        <button class="key ok"    data-key="Enter"      aria-label="OK">OK</button>
+        <button class="key right" data-key="ArrowRight" aria-label="Direita">▶</button>
+        <button class="key down"  data-key="ArrowDown"  aria-label="Baixo">▼</button>
+      </div>
+      <button class="key fire" data-key=" " aria-label="Atirar">FOGO</button>
+    </div>
+
+    <div class="hint">
+      <b>↑ ↓ ← →</b> mover · <b>Espaço</b> atirar · <b>Enter</b> jogar · <b>P</b> pausa<br/>
+      No celular: use os botões abaixo ou arraste na tela
+    </div>
+  </main>
+
+  <!-- Carregados em ordem: cada arquivo registra-se no namespace global SI.
+       Sem ES Modules de propósito, pra rodar abrindo direto no navegador. -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/entities.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
