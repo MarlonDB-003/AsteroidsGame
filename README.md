@@ -23,7 +23,8 @@ chegue ao fim das 5 fases. Seu recorde fica salvo no navegador.
 
 ## 🎮 Recursos
 
-- 3 tipos de inimigos (reto, em onda, atirador) + chefões com barra de vida
+- 6 tipos de inimigos (reto, em onda, atirador, mergulhador, ziguezague, perseguidor), cada um com sprite e movimento próprios
+- 5 chefes distintos — um por fase, com sprite, padrão de tiro (leque, mirado, rajada) e barra de vida próprios
 - Efeitos sonoros 8-bit gerados em tempo real (Web Audio API — sem arquivos)
 - *Game feel*: tremor de tela, flash de impacto, explosões em partículas
 - Recorde persistente (localStorage)
