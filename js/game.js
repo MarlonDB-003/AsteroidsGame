@@ -104,23 +104,26 @@ SI.Game = class {
     // bullets do player
     for (const b of this.bullets) b.update();
 
-    // spawns
+    // spawns — inimigos só surgem enquanto não há chefe em cena
     if (!this.boss) {
       if (--this.spawnTimer <= 0) {
-        const maxType = Math.min(SI.CONFIG.ENEMY.types.length, 1 + Math.floor(this.wave / 2));
-        const type = SI.utils.pick(SI.CONFIG.ENEMY.types.slice(0, maxType));
+        const pool = SI.CONFIG.ENEMY.types.filter(t => this.wave >= (t.minWave || 1));
+        const type = SI.utils.pick(pool);
         this.enemies.push(new SI.Enemy(type, this.wave));
         this.spawnTimer = Math.max(28, 70 - this.wave * 4);
       }
+      // ao atingir a pontuação, o chefe entra sozinho: a tela é limpa dos inimigos
       if (this.score >= this.wave * SI.CONFIG.BOSS.triggerScore) {
         this.boss = new SI.Boss(this.wave);
+        this.enemies.length = 0;
+        this.eBullets.length = 0;
         this.audio.wave();
       }
     }
 
     // inimigos
     for (const e of this.enemies) {
-      e.update(this.frame, onEnemyShoot);
+      e.update(this.frame, onEnemyShoot, this.player);
       // tiro do player x inimigo
       for (const b of this.bullets) {
         if (b.dead) continue;
@@ -155,7 +158,7 @@ SI.Game = class {
 
     // chefão
     if (this.boss) {
-      this.boss.update(onEnemyShoot);
+      this.boss.update(onEnemyShoot, this.player);
       for (const b of this.bullets) {
         if (b.dead) continue;
         if (b.x > this.boss.x - this.boss.w / 2 && Math.abs(b.y - this.boss.y) < this.boss.h / 2) {
@@ -166,7 +169,7 @@ SI.Game = class {
           if (this.boss.hp <= 0) {
             this._explode(this.boss.x, this.boss.y, 40);
             this.audio.explosion();
-            this.score += SI.CONFIG.BOSS.score;
+            this.score += this.boss.score;
             this.boss = null;
             this.shake = 12;
             this.flash = 8;
