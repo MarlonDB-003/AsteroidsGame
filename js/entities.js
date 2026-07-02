@@ -76,6 +76,13 @@ window.SI = window.SI || {};
       if (input.keys['ArrowLeft'])  this.x -= sp;
       if (input.keys['ArrowRight']) this.x += sp;
 
+      // analógico virtual (D-pad no celular): movimento proporcional ao deslize
+      if (input.stick && input.stick.active) {
+        const ssp = sp * cfg.stickSpeedMult;
+        this.x += input.stick.dx * ssp;
+        this.y += input.stick.dy * ssp;
+      }
+
       // toque: a nave persegue suavemente o dedo
       if (input.pointer.x !== null) {
         this.x += (input.pointer.x - this.x) * 0.25;
