@@ -21,6 +21,7 @@ SI.CONFIG = {
   PLAYER: {
     w: 14, h: 9,
     speed: 2.2,
+    stickSpeedMult: 1.3, // velocidade do analógico do celular (× speed); >1 = mais ágil
     fireCooldown: 9,   // frames entre tiros
     bulletSpeed: 4.2,
     invincibleFrames: 90, // tempo piscando após levar dano
